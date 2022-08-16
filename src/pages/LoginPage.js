@@ -1,39 +1,52 @@
 import { React, useContext } from "react";
 import { useForm } from "react-hook-form";
-import {useNavigate} from "react-router-dom"
-import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
+// import apiService from "../app/apiService";
 import { AuthContext } from "../component/AuthProvider";
-import { tabScrollButtonClasses } from "@mui/material";
+// import { BASE_URL } from "../app/config";
+// import { tabScrollButtonClasses } from "@mui/material";
 
-function LoginPage({redirect}) {
-  const { auth, setAuth } = useContext(AuthContext);
+function LoginPage() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const fakeUser = {username:"abc",email:"123"}
+  let from = location.state?.from?.pathname || "/";
 
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm();
+  const { setAuth,auth } = useContext(AuthContext);
 
-  // const [showPassword, setShowPassword] = useState(false);
-const navigate =useNavigate()
+  const { register, handleSubmit } = useForm();
+
   const onSubmit = data => {
-    try {
-      setAuth( data );
-      console.log(auth, "1");
-      console.log(data, "2");
-
-      if (data.username === "aaa") {
-        navigate(`${redirect}`)
-      }
-
-      setError("afterSubmit", { message: "Server Response Error" });
-    } catch (error) {
-      console.log(error);
+    if (data.username === fakeUser.username && data.email === fakeUser.email){
+      setAuth(data);
+      navigate(from, { replace: true })
+      // auth.isLoggedIn = "true"
+    } else {
+      alert("false")
     }
-  };
+    // data?.username === fakeUser.username && data.email === fakeUser.email
+    // navigate(from, { replace: true }):alert("false")
+    // :alert("null")
+    // console.log(BASE_URL);
+    // fetchLogin(data);
+    // await fetchLogin();
+    // fetchResult ? navigate(from, { replace: true }) : alert("false");
+  }
 
- 
+  // const fetchLogin = async (data) => {
+  //   try {
+  //     const res = await apiService.post(
+  //       "/api/login",
+  //       { data }
+  //     );
+  //     return res;
+  //   } catch (error) {
+  //     console.log({ error });
+  //   }
+  // };
+
+  //onSubmit trigged fetch function, if successful will navigate to new page
+  //if not return to homepage
 
   return (
     <div>
@@ -54,12 +67,9 @@ const navigate =useNavigate()
           <input
             type="text"
             autoComplete="off"
-            {...register(
-              "email"
-              //  { required: true }
-            )}
+            // {...register("email", { required: true })}
+            {...register("email")}
           />
-          {/* {errors.email && <p>Email is required</p>} */}
         </div>
         <div>
           <label>
@@ -96,12 +106,4 @@ export default LoginPage;
 //   formState: { error, isSubmitting },
 // } = methods;
 
- // const fetchLogin = async () => {
-  //   try {
-  //     const res = await axios.get("https://reqres.in/api/login", { onSubmit });
-  //     console.log(res);
-  //   } catch (error) {
-  //     console.log({ error });
-  //   }
-  // };
-  // fetchLogin();
+// fetchLogin();

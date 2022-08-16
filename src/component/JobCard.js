@@ -10,12 +10,21 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import { Container } from "@mui/system";
 
-export default function JobCard({ job, setRedirect }) {
+/* -------------------------------------------------------------------------- */
+/*                                    code                                    */
+/* -------------------------------------------------------------------------- */
+
+export default function JobCard({ job }) {
   const navigate = useNavigate();
   // const location = useLocation()
+  /* -------------------------------------------------------------------------- */
+  /*                                 declaration                                */
+  /* -------------------------------------------------------------------------- */
   return (
-    <Card 
-    // onClick={() => navigate(`/loginpage`)}
+    <Card
+      onClick={(e) => {
+        navigate(`/${job.id}`);
+      }}
     >
       <CardActionArea>
         <CardContent sx={{ height: `12rem` }}>
@@ -25,7 +34,7 @@ export default function JobCard({ job, setRedirect }) {
               {" "}
               {job.skills.map((skill) => (
                 <Chip
-                key ={ Math.random()}
+                  key={Math.random()}
                   label={skill}
                   sx={{
                     height: `1rem`,
@@ -42,8 +51,7 @@ export default function JobCard({ job, setRedirect }) {
           </Typography>
         </CardContent>
         <Container sx={{ width: `12rem`, p: 2 }}>
-          <Button onClick = {() => {setRedirect(`/${job.id}`);
-            navigate(`/${job.id}`)}}  variant="contained">LEARN MORE</Button>
+          <Button variant="contained">LEARN MORE</Button>
           {/* <Button onClick = {(e) => navigate(`/${job.id}`)} variant="contained">LEARN MORE</Button> */}
         </Container>
       </CardActionArea>

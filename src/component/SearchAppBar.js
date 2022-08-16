@@ -3,11 +3,14 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import { AuthContext } from "./AuthProvider";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -52,6 +55,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const { auth, setAuth } = React.useContext(AuthContext);
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ backgroundColor: `#912F40` }} position="static">
@@ -73,6 +79,27 @@ export default function SearchAppBar() {
           >
             JOB ROUTING
           </Typography>
+          {/* {auth ? (
+            <Button onClick={setAuth("")} variant="contained">
+              Log Out
+            </Button>
+          ) : (
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/loginpage");
+              }}
+              variant="contained"
+            >
+              Login
+            </Button>
+          )}
+          {auth?.username ? (
+            <Typography padding="0em 1em 0em 1em">{auth.username}</Typography>
+          ) : (
+            console.log("empty")
+          )} */}
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

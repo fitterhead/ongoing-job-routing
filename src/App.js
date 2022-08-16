@@ -1,9 +1,9 @@
 import React from "react";
 import HomePage from "./pages/HomePage";
 // import DetailPage from "./pages/DetailPage";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import jobs from "./jobs.json";
-import { Box } from "@mui/system";
+// import { Box } from "@mui/system";
 import DetailPage from "./pages/DetailPage";
 import LoginPage from "./pages/LoginPage";
 import { Layout } from "./component/Layout";
@@ -11,21 +11,17 @@ import RequiredAuth from "./component/RequireAuth";
 
 function App() {
   const [page, setPage] = React.useState(1);
-  const [redirect, setRedirect] = React.useState(null);
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+  const handleChange = (e, v) => {
+    setPage(v);
   };
   const newArray = jobs.slice((page - 1) * 5, (page - 1) * 5 + 5);
   const pageCount = Math.round(jobs.length / 5);
   console.log(newArray, "new Array");
   console.log(pageCount, "count");
   console.log(page, "count");
-  console.log(redirect, "redirect");
-
-  const fixedUser = { email: `abc`, password: `123` };
+  // console.log(redirect, "redirect");
 
   return (
-    <Box>
       <Routes>
         <Route
           path="/*"
@@ -38,19 +34,16 @@ function App() {
             />
           }
         >
+          <Route index element={<HomePage jobs={newArray} />} />
           <Route
-            index
-            element={<HomePage setRedirect={setRedirect} jobs={newArray} />}
+            path="loginpage"
+            element={<LoginPage />}
           />
-          <Route path="loginpage" element={<LoginPage redirect={redirect} fixedUser={fixedUser} />} />
-          <Route
-            element={<RequiredAuth redirect={redirect} fixedUser={fixedUser} />}
-          >
+          <Route element={<RequiredAuth />}>
             <Route path=":id" element={<DetailPage />} />
           </Route>
         </Route>
       </Routes>
-    </Box>
   );
 }
 

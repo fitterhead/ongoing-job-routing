@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { Container } from "@mui/material";
 import PaginationSize from "./PaginationSize";
 import SearchAppBar from "./SearchAppBar";
