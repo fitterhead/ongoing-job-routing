@@ -6,12 +6,13 @@ import { Button } from "@mui/material";
 // import CardMedia from '@mui/material/CardMedia';
 import Typography from "@mui/material/Typography";
 import { Box, CardActionArea } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import { Container } from "@mui/system";
 
-export default function JobCard({ job }) {
+export default function JobCard({ job, setRedirect }) {
   const navigate = useNavigate();
+  // const location = useLocation()
   return (
     <Card 
     // onClick={() => navigate(`/loginpage`)}
@@ -41,8 +42,9 @@ export default function JobCard({ job }) {
           </Typography>
         </CardContent>
         <Container sx={{ width: `12rem`, p: 2 }}>
-          <Button onClick = {() => navigate(`/${job.id}`)} variant="contained">LEARN MORE</Button>
-          {/* <Button onClick = {() => navigate(`/${job.id}`)} variant="contained">LEARN MORE</Button> */}
+          <Button onClick = {() => {setRedirect(`/${job.id}`);
+            navigate(`/${job.id}`)}}  variant="contained">LEARN MORE</Button>
+          {/* <Button onClick = {(e) => navigate(`/${job.id}`)} variant="contained">LEARN MORE</Button> */}
         </Container>
       </CardActionArea>
     </Card>

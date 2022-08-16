@@ -1,10 +1,11 @@
 import { React, useContext } from "react";
 import { useForm } from "react-hook-form";
+import {useNavigate} from "react-router-dom"
 import axios from "axios";
 import { AuthContext } from "../component/AuthProvider";
 import { tabScrollButtonClasses } from "@mui/material";
 
-function LoginPage() {
+function LoginPage({redirect}) {
   const { auth, setAuth } = useContext(AuthContext);
 
   const {
@@ -15,32 +16,29 @@ function LoginPage() {
   } = useForm();
 
   // const [showPassword, setShowPassword] = useState(false);
-
-  const onSubmit = async (data) => {
+const navigate =useNavigate()
+  const onSubmit = data => {
     try {
-      await setAuth({ ...auth, data });
+      setAuth( data );
       console.log(auth, "1");
       console.log(data, "2");
+
+      if (data.username === "aaa") {
+        navigate(`${redirect}`)
+      }
+
       setError("afterSubmit", { message: "Server Response Error" });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const fetchLogin = async () => {
-    try {
-      const res = await axios.get("https://reqres.in/api/login", { onSubmit });
-      console.log(res);
-    } catch (error) {
-      console.log({ error });
-    }
-  };
-  fetchLogin();
+ 
 
   return (
     <div>
       <h1>LoginPageTitle</h1>
-      <form onSubmit={() => handleSubmit(onSubmit)()}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="username">Username</label>
           <input
@@ -97,3 +95,13 @@ export default LoginPage;
 //   control,
 //   formState: { error, isSubmitting },
 // } = methods;
+
+ // const fetchLogin = async () => {
+  //   try {
+  //     const res = await axios.get("https://reqres.in/api/login", { onSubmit });
+  //     console.log(res);
+  //   } catch (error) {
+  //     console.log({ error });
+  //   }
+  // };
+  // fetchLogin();

@@ -11,6 +11,7 @@ import RequiredAuth from "./component/RequireAuth";
 
 function App() {
   const [page, setPage] = React.useState(1);
+  const [redirect, setRedirect] = React.useState(null);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
@@ -19,11 +20,9 @@ function App() {
   console.log(newArray, "new Array");
   console.log(pageCount, "count");
   console.log(page, "count");
+  console.log(redirect, "redirect");
 
-  // const [job, setJob] = React.useState({});
-  // const changeJob = (job) => {
-  //   setJob(job);
-  // };
+  const fixedUser = { email: `abc`, password: `123` };
 
   return (
     <Box>
@@ -31,14 +30,24 @@ function App() {
         <Route
           path="/*"
           element={
-            <Layout newArray={newArray} pageCount={pageCount} page={page} />
+            <Layout
+              newArray={newArray}
+              pageCount={pageCount}
+              page={page}
+              handleChange={handleChange}
+            />
           }
         >
-          <Route path="homepage" element={<HomePage jobs={newArray} />} />
-          {/* <Route path="/" element={<RequiredAuth />}>
+          <Route
+            index
+            element={<HomePage setRedirect={setRedirect} jobs={newArray} />}
+          />
+          <Route path="loginpage" element={<LoginPage redirect={redirect} fixedUser={fixedUser} />} />
+          <Route
+            element={<RequiredAuth redirect={redirect} fixedUser={fixedUser} />}
+          >
             <Route path=":id" element={<DetailPage />} />
-          </Route> */}
-          <Route path="loginpage" element={<LoginPage />} />
+          </Route>
         </Route>
       </Routes>
     </Box>

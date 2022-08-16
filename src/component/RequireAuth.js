@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import  { useLocation, Navigate } from 'react-router-dom'
+import  { Navigate, Outlet } from 'react-router-dom'
 import { AuthContext } from './AuthProvider';
 
 
@@ -7,8 +7,8 @@ function RequiredAuth() {
     // const location = useLocation();
     const {auth} = useContext(AuthContext)
     return (
-        auth.username
-        ? <Navigate to = '/DetaiLPage' replace/>
+        auth.username === "aaa"
+        ? <Outlet replace/>
         : <Navigate to = '/loginpage' replace/>
 
     )
