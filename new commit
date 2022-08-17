@@ -1,0 +1,23 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: Morita <morita@Moritas-MacBook-Pro.local>
+#
+# On branch main
+# Your branch and 'origin/main' have diverged,
+# and have 1 and 10 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# Changes to be committed:
+#	new file:   .env
+#	modified:   src/App.js
+#	new file:   src/app/apiService.js
+#	new file:   src/app/config.js
+#	modified:   src/component/AuthProvider.js
+#	modified:   src/component/JobCard.js
+#	modified:   src/component/Layout.js
+#	modified:   src/component/RequireAuth.js
+#	modified:   src/component/SearchAppBar.js
+#	modified:   src/pages/LoginPage.js
+#
