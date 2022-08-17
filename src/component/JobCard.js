@@ -14,16 +14,18 @@ import { Container } from "@mui/system";
 /*                                    code                                    */
 /* -------------------------------------------------------------------------- */
 
-export default function JobCard({ job }) {
+export default function JobCard({ job,handleOpen,handleClose }) {
   const navigate = useNavigate();
-  // const location = useLocation()
+  const location = useLocation()
   /* -------------------------------------------------------------------------- */
   /*                                 declaration                                */
   /* -------------------------------------------------------------------------- */
   return (
     <Card
+      state={{ from: location, backgroundLocation: location }}
       onClick={(e) => {
         navigate(`/${job.id}`);
+        
       }}
     >
       <CardActionArea>

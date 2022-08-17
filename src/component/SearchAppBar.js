@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -57,7 +58,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar() {
   const { auth, setAuth } = React.useContext(AuthContext);
   const navigate = useNavigate();
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ backgroundColor: `#912F40` }} position="static">
@@ -79,26 +79,27 @@ export default function SearchAppBar() {
           >
             JOB ROUTING
           </Typography>
-          {/* {auth ? (
-            <Button onClick={setAuth("")} variant="contained">
-              Log Out
-            </Button>
+          {auth.username ? (
+            <Box sx={{ display: 'flex' }}><Button
+            onClick={(e) => {
+              setAuth({ email: null });
+            }}
+            variant="contained"
+          >
+            Log Out
+          </Button>
+            <Typography padding="0.5em 1em">{auth.username}</Typography></Box>
           ) : (
             <Button
-              onClick={(e) => {
-                e.preventDefault();
-                navigate("/loginpage");
-              }}
-              variant="contained"
-            >
-              Login
-            </Button>
+      onClick={(e) => {
+        e.preventDefault();
+        navigate("/loginpage");
+      }}
+      variant="contained"
+    >
+      Login
+    </Button>
           )}
-          {auth?.username ? (
-            <Typography padding="0em 1em 0em 1em">{auth.username}</Typography>
-          ) : (
-            console.log("empty")
-          )} */}
 
           <Search>
             <SearchIconWrapper>

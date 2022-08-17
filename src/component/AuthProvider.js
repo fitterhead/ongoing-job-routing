@@ -6,8 +6,8 @@ export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
-    email: null,
-    username: null,
+    email: "",
+    username: "",
     isLoggedIn: "false",
   });
   return (

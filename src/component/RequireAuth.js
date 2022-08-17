@@ -5,6 +5,7 @@ import { AuthContext } from "./AuthProvider";
 function RequiredAuth() {
   const { auth } = useContext(AuthContext);
   let location = useLocation();
+  console.log (location, "locationtest")
 
   // return auth ? (
   //   <Outlet replace />
@@ -13,7 +14,7 @@ function RequiredAuth() {
   // );
 
   if (!auth.username) {
-    return <Navigate to="/loginpage" state={{ from: location }} replace />
+    return <Navigate to="/loginpage" state={{ from: location, backgroundLocation: location }} replace />
 
   } else {
     return <Outlet replace />
